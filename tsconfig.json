@@ -10,7 +10,7 @@
     "rootDir": "src",
     "outDir": "dist",
     "resolveJsonModule": true,
-    "types": ["node"],
+    "types": ["node","@types/jest"],
     "noUncheckedIndexedAccess": true
   },
   "include": ["src/**/*.ts"],
