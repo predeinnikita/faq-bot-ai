@@ -2,7 +2,7 @@ import { Telegraf, Markup } from 'telegraf';
 import { handlePopularQuestions } from './handlers/popular';
 import { handleAskAdmin } from './handlers/admin';
 import { handleKeyDates } from './handlers/dates';
-import { handleAiQuestion } from './handlers/ai';
+import { createHandleAiQuestion } from './handlers/ai';
 
 export function createBot(token: string): Telegraf {
   const bot = new Telegraf(token);
@@ -25,7 +25,7 @@ export function createBot(token: string): Telegraf {
 
   bot.hears('Узнать ключевые даты', handleKeyDates);
 
-  bot.hears('Задать вопрос ИИ', handleAiQuestion);
+  bot.hears('Задать вопрос ИИ', createHandleAiQuestion(bot));
 
   return bot;
 }
