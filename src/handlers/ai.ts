@@ -18,36 +18,36 @@ export function createHandleAiQuestion(bot: Telegraf) {
     //   return;
     // }
 
-    usersWaitingForAi.add(userId);
+    // usersWaitingForAi.add(userId);
 
-    await ctx.reply('🤖 Задайте ваш вопрос, и я постараюсь на него ответить с помощью ИИ:');
+    // await ctx.reply('🤖 Задайте ваш вопрос, и я постараюсь на него ответить с помощью ИИ:');
 
-    const handler = async (msgCtx: Context) => {
-      // обрабатываем только этого пользователя
-      if (msgCtx.from?.id !== userId) return;
+    // const handler = async (msgCtx: Context) => {
+    //   // обрабатываем только этого пользователя
+    //   if (msgCtx.from?.id !== userId) return;
 
-      const userQuestion = msgCtx?.text;
-      if (!userQuestion) return;
+    //   const userQuestion = msgCtx?.text;
+    //   if (!userQuestion) return;
 
-      if (!usersWaitingForAi.has(userId)) {
-        return;
-      }
+    //   if (!usersWaitingForAi.has(userId)) {
+    //     return;
+    //   }
 
-      // как только получили текст — снимаем «ожидание»
+    //   // как только получили текст — снимаем «ожидание»
 
-      await msgCtx.reply('⏳ Обрабатываю ваш вопрос...');
+    //   await msgCtx.reply('⏳ Обрабатываю ваш вопрос...');
 
-      try {
-        const answer = await aiService.ask(userQuestion);
-        await msgCtx.reply(`🤖 Ответ ИИ:\n\n${answer}`);
-        usersWaitingForAi.delete(userId);
-      } catch (error) {
-        console.error('Error in AI handler:', error);
-        await msgCtx.reply('❌ Произошла ошибка при обработке вашего вопроса. Попробуйте позже.');
-      }
-    };
+    //   try {
+    //     const answer = await aiService.ask(userQuestion);
+    //     await msgCtx.reply(`🤖 Ответ ИИ:\n\n${answer}`);
+    //     usersWaitingForAi.delete(userId);
+    //   } catch (error) {
+    //     console.error('Error in AI handler:', error);
+    //     await msgCtx.reply('❌ Произошла ошибка при обработке вашего вопроса. Попробуйте позже.');
+    //   }
+    // };
 
-    // общий обработчик текста: внутри фильтруем по usersWaitingForAi
-    bot.on('text', handler as any);
+    // // общий обработчик текста: внутри фильтруем по usersWaitingForAi
+    // bot.on('text', handler as any);
   };
 }
